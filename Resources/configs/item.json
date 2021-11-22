@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "EXP",
+    "icon": "exp.png",
+    "describe": "提升主角等级"
+  },
+  {
+    "id": 2,
+    "name": "元宝",
+    "icon": "gold.png",
+    "describe": "主要货币"
+  },
+  {
+    "id": 3,
+    "name": "血瓶",
+    "icon": "item.png",
+    "describe": "可回复500点生命值",
+    "sell": 100,
+	"type":1
+  },
+  {
+    "id": 4,
+    "name": "矿石",
+    "icon": "stone.png",
+    "describe": "可用于强化装备",
+    "sell": 50,
+	"type":2
+  }
+]

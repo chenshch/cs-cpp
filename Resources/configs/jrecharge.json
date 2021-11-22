@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "icon": "gold_item1.png",
+    "recharge": 6,
+    "get": 60
+  },
+  {
+    "id": 2,
+    "icon": "gold_item2.png",
+    "recharge": 30,
+    "get": 300
+  },
+  {
+    "id": 3,
+    "icon": "gold_item3.png",
+    "recharge": 68,
+    "get": 680
+  },
+  {
+    "id": 4,
+    "icon": "gold_item4.png",
+    "recharge": 98,
+    "get": 980
+  },
+  {
+    "id": 5,
+    "icon": "gold_item5.png",
+    "recharge": 128,
+    "get": 1280
+  },
+  {
+    "id": 6,
+    "icon": "gold_item6.png",
+    "recharge": 198,
+    "get": 1980
+  },
+  {
+    "id": 7,
+    "icon": "gold_item7.png",
+    "recharge": 258,
+    "get": 2580
+  },
+  {
+    "id": 8,
+    "icon": "gold_item8.png",
+    "recharge": 328,
+    "get": 3280
+  },
+  {
+    "id": 9,
+    "icon": "gold_item9.png",
+    "recharge": 488,
+    "get": 4880
+  },
+  {
+    "id": 10,
+    "icon": "gold_item10.png",
+    "recharge": 648,
+    "get": 6480
+  }
+]

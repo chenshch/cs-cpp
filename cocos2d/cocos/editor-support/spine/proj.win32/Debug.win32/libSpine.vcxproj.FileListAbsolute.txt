@@ -1,0 +1,2 @@
+D:\client\cocos\x2.3\cs-cpp\proj.win32\Debug.win32\libSpine.pdb
+D:\client\cocos\x2.3\cs-cpp\cocos2d\cocos\editor-support\spine\proj.win32\Debug.win32\libSpine.pdb
