@@ -110,8 +110,9 @@ void CMonster::updatePos(const cocos2d::Vec2& pos_hero, const cocos2d::Vec2& pos
 		setDir(dir);
 	}
 	else {
-		if (dir == MoveDir::eDown || dir == MoveDir::eLeft_Down || dir == MoveDir::eRight_Down) {
-			setDir(dir);
+		auto role_dir = GameUtils::getCocosDir(getPosition(), pos_hero);
+		if (role_dir == MoveDir::eDown || role_dir == MoveDir::eLeft_Down || role_dir == MoveDir::eRight_Down) {
+			setDir(role_dir);
 		}
 	}
 
