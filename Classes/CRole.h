@@ -41,7 +41,7 @@ public:
         MoveDir dir = MoveDir::eUnkown;
         PlayerState state = PlayerState::eWait;
     };
-   FollowData getNextPathRecord();
+    FollowData getNextPathRecord();
 	static CRole* createRole(bool bmain);
 	CREATE_FUNC(CRole);
 private:

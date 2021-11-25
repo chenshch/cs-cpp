@@ -34,10 +34,8 @@ bool CNpc::init() {
 	addChild(spTitle);
 	spTitle->setPositionY(20 + getHeroSprite()->getContentSize().height / 2);
 	lister = EventListenerTouchOneByOne::create();
-	//lister->setSwallowTouches(true);
 	lister->onTouchBegan = CC_CALLBACK_2(CNpc::touchBegain, this);
 	lister->onTouchEnded = CC_CALLBACK_2(CNpc::touchEnd, this);
-	//getEventDispatcher()->addEventListenerWithSceneGraphPriority(lister, getHeroSprite());
 	getHeroSprite()->getEventDispatcher()->addEventListenerWithFixedPriority(lister, 1);
 	return true;
 }

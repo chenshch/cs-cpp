@@ -314,7 +314,6 @@ void MapLayer::update(float delta)
 
 				auto monster_pos = monster->getPosition();
 				auto monster_coor = tileCoorFromPos(monster_pos);
-
 				auto role_coor = tileCoorFromPos(role_pos_new);
 
 				star_def.start_point = APoint(monster_coor.x, monster_coor.y);
@@ -326,7 +325,7 @@ void MapLayer::update(float delta)
 					auto layer_block = tmap->getLayer("zuai");
 					pos_next = layer_block->getPositionAt(cocos2d::Vec2(path.at(0).row, path.at(0).col));
 				}
-				monster->updatePos(role_pos_new, pos_next);
+				monster->updatePos(role_pos_new, pos_next,delta);
 			}
 		}
 		else {

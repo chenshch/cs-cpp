@@ -16,6 +16,7 @@ CMonster* CMonster::createWith(int monsterId) {
 }
 
 CMonster::CMonster(int monsterId) {
+	atk_delay = 0.0f;
 	setMonsterId(monsterId);
 	atk_dis = cocos2d::RandomHelper::random_real(CPlayer::dis_atk, CPlayer::dis_atk + 30.0f);
 }
@@ -77,6 +78,7 @@ void CMonster::updateAni() {
 	data.bPlist = true;
 	data.func_end = [=] {
 		if (state == PlayerState::eAtk) {
+			atk_delay = RandomHelper::random_real(0.2f, 1.0f);
 			setPlayerState(PlayerState::eWait);
 		}
 		else if (state == PlayerState::eDeath) {
@@ -100,16 +102,13 @@ void CMonster::updateAni() {
 	CPlayer::updateAni();
 }
 
-void CMonster::updatePos(const cocos2d::Vec2& pos_hero, const cocos2d::Vec2& pos_next) {
+void CMonster::updatePos(const cocos2d::Vec2& pos_hero, const cocos2d::Vec2& pos_next,float delta) {
 	if (getPlayerState() == PlayerState::eDeath)
 	{
 		return;
 	}
-	auto dir = GameUtils::getCocosDir(getPosition(), pos_next);
-	if (!isBoss()) {
-		setDir(dir);
-	}
-	else {
+
+	if (isBoss()) {
 		auto role_dir = GameUtils::getCocosDir(getPosition(), pos_hero);
 		if (role_dir == MoveDir::eDown || role_dir == MoveDir::eLeft_Down || role_dir == MoveDir::eRight_Down) {
 			setDir(role_dir);
@@ -118,16 +117,23 @@ void CMonster::updatePos(const cocos2d::Vec2& pos_hero, const cocos2d::Vec2& pos
 
 	float dis = pos_hero.distance(getPosition());
 	if (dis < atk_dis) {
-		if (getPlayerState() != PlayerState::eAtk) {
-			setPlayerState(PlayerState::eAtk);
-			rapidjson::Document doc;
-			auto config = GameUtils::getConfig(doc,"configs/monster.json", "id", getMonsterId());
-			if (config == nullptr)
-				return;
-			auto atk = (*config)["atk"].GetInt();
-			GameUtils::sendEvent(event_battle_role_hit, (void*)atk);
+		if (atk_delay <= 0) {
+			if (!isBoss()) {
+				auto dir = GameUtils::getCocosDir(getPosition(), pos_hero);
+				setDir(dir);
+			}
+			atk();
+		}
+		else {
+			atk_delay -= delta;
 		}
 		return;
+	}
+	else {
+		if (!isBoss()) {
+			auto dir = GameUtils::getCocosDir(getPosition(), pos_next);
+			setDir(dir);
+		}
 	}
 
 	if (isBoss()) {
@@ -167,4 +173,16 @@ void CMonster::updatePos(const cocos2d::Vec2& pos_hero, const cocos2d::Vec2& pos
 bool CMonster::isBoss()
 {
 	return getMonsterId() == 3 || getMonsterId() == 4;
+}
+
+void CMonster::atk() {
+	if (getPlayerState() != PlayerState::eAtk) {
+		setPlayerState(PlayerState::eAtk);
+		rapidjson::Document doc;
+		auto config = GameUtils::getConfig(doc, "configs/monster.json", "id", getMonsterId());
+		if (config == nullptr)
+			return;
+		auto atk = (*config)["atk"].GetInt();
+		GameUtils::sendEvent(event_battle_role_hit, (void*)atk);
+	}
 }

@@ -113,6 +113,9 @@ void CRole::updateFollow(const cocos2d::Vec2& map_pos) {
 			auto s_pos = fd_r.pos - fd_r.map_pos + map_pos;
 			setPosition(s_pos);
 		}
+		else {
+
+		}
 	}
 	else {
 		while (captainPathQueue.size() >= 100)
